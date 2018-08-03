@@ -27,7 +27,11 @@ export default class App extends Component {
 
   render() {
     const placesOutput = this.state.places.map((place, i) => (
+<<<<<<< HEAD
       <ListItem key={i} placeName={place} />
+=======
+      <Text key={i}>{place}</Text>
+>>>>>>> ed0c130428a93b4b3e6faeb3411264f4077ad076
     ));
 
     return (
@@ -43,7 +47,11 @@ export default class App extends Component {
             style={styles.placeButton}
             onPress={this.placeSubmitHandler} />
         </View>
+<<<<<<< HEAD
         <View style={styles.listContainer}>
+=======
+        <View>
+>>>>>>> ed0c130428a93b4b3e6faeb3411264f4077ad076
           {placesOutput}
         </View>
       </View>
