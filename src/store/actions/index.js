@@ -1,0 +1,1 @@
+export { addPlace, deletePlace, slectPlace, deselectPlace } from './places.js'
