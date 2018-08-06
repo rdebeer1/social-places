@@ -9,7 +9,7 @@ export default class App extends Component {
     places: []
   };
 
-  placeAddedHandler = (placeName) => {
+  placeAddedHandler = placeName => {
     this.setState(prevState => {
       return {
         places: prevState.places.concat(placeName)
@@ -17,11 +17,21 @@ export default class App extends Component {
     });
   };
 
+  placeDeletedHandler = index => {
+    this.setState(prevState => {
+      return {
+        places: prevState.places.filter((place, i) => {
+          return i !== index;
+        })
+      };
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <PlaceInput onPlaceAdded={this.placeAddedHandler} />
-        <PlaceList places={this.state.places} />
+        <PlaceList places={this.state.places} onItemDeleted={this.placeDeletedHandler} />
       </View>
     );
   }
