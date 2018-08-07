@@ -1,6 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import updateObject from '../../hoc/utility';
-import placeImage from './src/assets/social-place.jpg';
+import { updateObject } from '../../hoc/utility';
 
 const initialState = {
   places: [],
@@ -9,18 +8,20 @@ const initialState = {
 
 const addPlace = (state, action) => {
   return updateObject(state, {
-    places: prevState.places.concat({
-      key: (Math.random() + 1).toString(36).substring(7),
+    places: state.places.concat({
+      key: Math.random(),
       name: action.placeName,
-      image: placeImage
+      image: {
+        uri: 'https://res.cloudinary.com/culturemap-com/image/upload/q_auto/ar_4:3,c_fill,g_faces:center,w_1200/v1508855968/photos/263214_original.jpg'
+      }
     })
   });
 };
 
 const deletePlace = (state, action) => {
   return updateObject(state, {
-    places: prevState.places.filter(place => {
-        return place.key !== prevState.selectedPlace.key;
+    places: state.places.filter(place => {
+        return place.key !== state.selectedPlace.key;
     }),
     selectedPlace: null
   });
@@ -28,13 +29,13 @@ const deletePlace = (state, action) => {
 
 const selectPlace = (state, action) => {
   return updateObject(state, {
-    selectedPlace:prevState.places.find(place => {
-          return place.key === key;
+    selectedPlace: state.places.find(place => {
+          return place.key === action.placeKey;
     })
   });
 };
 
-const unselectPlace = (state, action) => {
+const deselectPlace = (state, action) => {
   return updateObject(state, {
     selectedPlace: null
   });
@@ -46,7 +47,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.ADD_PLACE: return addPlace(state, action);
     case actionTypes.DELETE_PLACE: return deletePlace(state, action);
     case actionTypes.SELECT_PLACE: return selectPlace(state, action);
-    case actionTypes.DELETE_PLACE: return unselectPlace(state, action);
+    case actionTypes.DESELECT_PLACE: return deselectPlace(state, action);
     default: return state;
   }
 };

@@ -22,7 +22,7 @@ class App extends Component {
   }
   
   modalClosedHandler = () => {
-    this.props.onDeselectPlace
+    this.props.onDeselectPlace();
   };
 
   render() {
