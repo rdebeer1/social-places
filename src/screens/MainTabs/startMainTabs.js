@@ -18,7 +18,8 @@ const startTabs = () => {
                         leftButtons: [
                             {
                                 icon: sources[2],
-                                title: 'Menu'
+                                title: 'Menu',
+                                id: 'sideDrawerToggle'
                             }
                         ]
                     }
@@ -29,10 +30,13 @@ const startTabs = () => {
                     title: 'Share Place',
                     icon: sources[1],
                     navigatorButtons: {
-                        leftButtons: [{
-                            icon: sources[2],
-                            title: 'Menu'
-                        }]
+                        leftButtons: [
+                            {
+                                icon: sources[2],
+                                title: 'Menu',
+                                id: 'sideDrawerToggle'
+                            }
+                        ]
                     }
                 }
             ],
