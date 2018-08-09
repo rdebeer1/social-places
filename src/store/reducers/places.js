@@ -20,7 +20,7 @@ const addPlace = (state, action) => {
 const deletePlace = (state, action) => {
   return updateObject(state, {
     places: state.places.filter(place => {
-        return place.key !== state.selectedPlace.key;
+        return place.key !== action.placeKey;
     }),
   });
 };
