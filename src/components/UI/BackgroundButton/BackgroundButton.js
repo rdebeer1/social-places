@@ -7,8 +7,8 @@ const backgroundButton = props => {
     <View 
       style={[
         styles.backgroundButton, 
-        {backgroundColor: props.color, borderColor: props.color}]}>
-      <Text style={styles.text}>{props.children}</Text>
+        {backgroundColor: props.color, borderColor: props.color}, props.disabled ? styles.disabled : null]}>
+      <Text style={props.disabled ? styles.disabledText : styles.text}>{props.children}</Text>
     </View>
   )
 
@@ -21,6 +21,10 @@ const backgroundButton = props => {
         </TouchableNativeFeedback>
       </View>
     );
+  }
+
+  if (props.disabled) {
+    return content;
   }
 
   return (
@@ -44,6 +48,16 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  }, 
+  disabled: {
+    backgroundColor: '#eee',
+    borderColor: '#aaa',
+    width: Platform.OS === 'android' ? null : '50%'
+  },
+  disabledText: {
+    color: '#aaa',
     fontWeight: 'bold',
     textAlign: 'center',
   }
