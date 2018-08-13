@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet, ImageBackground } from 'react-native';
+import { View, StyleSheet, ImageBackground } from 'react-native';
 
 //screens
 import startMainTabs from '../MainTabs/startMainTabs';
 //components
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput';
-import HeadingText from '../../components/UI/HeadingText/HeadingText';
-import MainText from '../../components/UI/MainText/MainText';
 import BackgroundButton from '../../components/UI/BackgroundButton/BackgroundButton'
 //source
 import backgroundImage from '../../assets/social-place.jpg'
