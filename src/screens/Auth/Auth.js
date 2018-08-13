@@ -15,6 +15,7 @@ class AuthScreen extends Component {
             ? 'portrait' 
             : 'landscape'
     }
+    
     constructor(props) {
         super(props);
         Dimensions.addEventListener('change', this.updateStyles);
