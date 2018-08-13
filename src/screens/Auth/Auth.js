@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, ImageBackground, Dimensions } from 'react-native';
-
+import { connect } from 'react-redux';
 //screens
 import startMainTabs from '../MainTabs/startMainTabs';
+//actions
+import * as actions from '../../store/actions/index';
 //components
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput';
-import BackgroundButton from '../../components/UI/BackgroundButton/BackgroundButton'
+import BackgroundButton from '../../components/UI/BackgroundButton/BackgroundButton';
 //utility
-import validate from '../../utility/validation'
+import validate from '../../utility/validation';
 //source
-import backgroundImage from '../../assets/social-place.jpg'
+import backgroundImage from '../../assets/social-place.jpg';
 
 class AuthScreen extends Component {
     state = {
@@ -63,6 +65,11 @@ class AuthScreen extends Component {
     }
 
     loginHandler = () => {
+        const authData = {
+            email: this.state.controls.email.value,
+            password: this.state.controls.password.value
+        };
+        this.props.onLogin(authData)
         startMainTabs();
     }
 
@@ -204,4 +211,10 @@ const styles = StyleSheet.create({
     }
 });
 
-export default AuthScreen;
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogin: (authData) => dispatch(actions.tryAuth(authData))
+    };
+};
+
+export default connect(null, mapDispatchToProps)(AuthScreen);
