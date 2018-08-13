@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import { updateObject } from '../../hoc/utility';
+import { updateObject } from '../../hoc/updateObject';
 
 const initialState = {
   places: []

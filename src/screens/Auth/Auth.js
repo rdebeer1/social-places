@@ -6,6 +6,8 @@ import startMainTabs from '../MainTabs/startMainTabs';
 //components
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput';
 import BackgroundButton from '../../components/UI/BackgroundButton/BackgroundButton'
+//utility
+import validate from '../../utility/validation'
 //source
 import backgroundImage from '../../assets/social-place.jpg'
 
@@ -62,13 +64,36 @@ class AuthScreen extends Component {
     }
 
     updateInputState = (key, value) => {
+        let connectedValue = {};
+        if (this.state.controls[key].validationRules.equalTo) {
+            const equalControl = this.state.controls[key].validationRules.equalTo
+            const equalValue = this.state.controls[equalControl].value;
+            connectedValue = {
+                ...connectedValue,
+                equalTo: equalValue
+            }
+        }
+        if (key === 'password') {
+            connectedValue = {
+                ...connectedValue,
+                equalTo: value
+            }
+        }
         this.setState(prevState => {
             return {
                 controls: {
                     ...prevState.controls,
+                    confirmPassword: {
+                        ...prevState.controls.confirmPassword,
+                        valid: 
+                            key === 'password' 
+                                ? validate(prevState.controls.confirmPassword.value, prevState.controls.confirmPassword.validationRules, connectedValue) 
+                                : prevState.controls.confirmPassword.valid
+                    },
                     [key]: {
                         ...prevState.controls[key],
-                        value: value
+                        value: value,
+                        valid: validate(value, prevState.controls[key].validationRules, connectedValue)
                     }
                 }
             }
@@ -87,7 +112,7 @@ class AuthScreen extends Component {
                         <DefaultInput 
                             placeholder='E-Mail' 
                             style={styles.input} 
-                            placeholderTextColor='rgba(255, 255, 255, 0.7)'
+                            placeholderTextColor='rgba(255, 255, 255, 0.8)'
                             value={this.state.controls.email.value}
                             onChangeText={(val) => this.updateInputState('email', val)} />
                         <View style={this.state.viewMode === 'portrait' 
@@ -99,7 +124,7 @@ class AuthScreen extends Component {
                                 <DefaultInput 
                                     placeholder='Password' 
                                     style={styles.input} 
-                                    placeholderTextColor='rgba(255, 255, 255, 0.7)'
+                                    placeholderTextColor='rgba(255, 255, 255, 0.8)'
                                     value={this.state.controls.password.value}
                                     onChangeText={(val) => this.updateInputState('password', val)} />
                             </View>
@@ -109,7 +134,7 @@ class AuthScreen extends Component {
                                 <DefaultInput 
                                     placeholder='Confirm Password' 
                                     style={styles.input} 
-                                    placeholderTextColor='rgba(255, 255, 255, 0.7)'
+                                    placeholderTextColor='rgba(255, 255, 255, 0.8)'
                                     value={this.state.controls.confirmPassword.value}
                                     onChangeText={(val) => this.updateInputState('confirmPassword', val)} />
                             </View>
