@@ -12,7 +12,8 @@ const addPlace = (state, action) => {
       name: action.placeName,
       image: {
         uri: 'https://res.cloudinary.com/culturemap-com/image/upload/q_auto/ar_4:3,c_fill,g_faces:center,w_1200/v1508855968/photos/263214_original.jpg'
-      }
+      },
+      location: action.location
     })
   });
 };
