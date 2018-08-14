@@ -17,7 +17,7 @@ const placeInput = props => (
 
 const styles = StyleSheet.create({
   placeView: {
-      width: '90%',
+      width: '80%',
       borderWidth: 1,
       borderColor: '#eee',
       padding: 10,

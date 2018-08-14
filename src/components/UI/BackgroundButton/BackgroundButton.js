@@ -14,7 +14,7 @@ const backgroundButton = props => {
 
   if (Platform.OS === 'android') {
     return (
-      <View style={styles.touchableOpacity}>
+      <View style={[styles.touchableOpacity]}>
         <TouchableNativeFeedback 
           onPress={props.onPress}>
           {content}
