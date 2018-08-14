@@ -12,17 +12,6 @@ const backgroundButton = props => {
     </View>
   )
 
-  if (Platform.OS === 'android') {
-    return (
-      <View style={[styles.touchableOpacity]}>
-        <TouchableNativeFeedback 
-          onPress={props.onPress}>
-          {content}
-        </TouchableNativeFeedback>
-      </View>
-    );
-  }
-
   if (props.disabled) {
     return content;
   }
@@ -54,7 +43,7 @@ const styles = StyleSheet.create({
   disabled: {
     backgroundColor: '#eee',
     borderColor: '#aaa',
-    width: Platform.OS === 'android' ? null : '50%'
+    width: '50%'
   },
   disabledText: {
     color: '#aaa',

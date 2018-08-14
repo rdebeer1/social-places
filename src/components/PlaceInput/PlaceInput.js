@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
   placeView: {
       width: '80%',
       borderWidth: 1,
+      borderTopWidth: 0,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
       borderColor: '#eee',
       padding: 10,
       backgroundColor: 'white'
@@ -26,7 +29,9 @@ const styles = StyleSheet.create({
   placeInput: {
     margin: 0,
     padding: 0,
-    borderWidth: 0
+    borderWidth: 0,
+    textAlign: 'center',
+    fontWeight: 'bold'
   }
 })
 
