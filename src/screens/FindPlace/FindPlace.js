@@ -133,7 +133,8 @@ const styles = StyleSheet.create({
         color: 'orange',
         fontWeight: 'bold',
         fontSize: 26
-    }
+    },
+    
 });
 
 mapStateToProps = state => {

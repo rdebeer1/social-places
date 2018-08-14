@@ -1,22 +1,32 @@
 import React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 
+//components
+import DefaultInput from '../UI/DefaultInput/DefaultInput'
+
 const placeInput = props => (
-  <TextInput
-    style={styles.placeInput} 
+  <DefaultInput
+    viewStyle={styles.placeView}
+    style={styles.placeInput}
     placeholder='Place Name' 
-    value={props.placeName}
-    onChangeText={props.onChangeText}
-    underlineColorAndroid = 'transparent' />
+    value={props.placeData.value}
+    valid={props.placeData.valid}
+    touched={props.placeData.touched}
+    onChangeText={props.onChangeText} />
 );
 
 const styles = StyleSheet.create({
-  placeInput: {
-      width: '100%',
+  placeView: {
+      width: '90%',
       borderWidth: 1,
       borderColor: '#eee',
-      padding: 5,
-      margin: 8,
+      padding: 10,
+      backgroundColor: 'white'
+  },
+  placeInput: {
+    margin: 0,
+    padding: 0,
+    borderWidth: 0
   }
 })
 

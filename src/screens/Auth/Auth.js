@@ -145,65 +145,69 @@ class AuthScreen extends Component {
             <ImageBackground 
                 style={styles.backgroundImage} 
                 source={backgroundImage}>
-                <TouchableWithoutFeedback
-                    onPress={Keyboard.dismiss}>
-                    <KeyboardAvoidingView
-                        behavior='padding' 
-                        style={styles.container}>
-                            <View 
-                                style={styles.inputContainer}>
-                                <DefaultInput 
-                                    placeholder='E-Mail' 
-                                    style={styles.input} 
-                                    placeholderTextColor='rgba(255, 255, 255, 0.8)'
-                                    value={this.state.controls.email.value}
-                                    onChangeText={(val) => this.updateInputState('email', val)}
-                                    valid={this.state.controls.email.valid}
-                                    touched={this.state.controls.email.touched} 
-                                    autoCapitalize='none' 
-                                    autoCorrect={false}
-                                    keyboardType='email-address' />
-                                <View style={
-                                    this.state.viewMode === 'portrait' || 
-                                    this.state.authMode === 'Sign In'
-                                        ? styles.portraitPasswordContainer 
-                                        : styles.landscapePasswordContainer}>
+                <KeyboardAvoidingView
+                    behavior='padding' 
+                    style={styles.container}>
+                    <TouchableWithoutFeedback
+                        onPress={Keyboard.dismiss}>
+                        <View style={styles.largeWrapper}>
+                            <View style={styles.smallWrapper}>
+                                <View 
+                                    style={styles.inputContainer}>
+                                    <DefaultInput 
+                                        placeholder='E-Mail' 
+                                        style={styles.input} 
+                                        placeholderTextColor='rgba(255, 255, 255, 0.8)'
+                                        value={this.state.controls.email.value}
+                                        onChangeText={(val) => this.updateInputState('email', val)}
+                                        valid={this.state.controls.email.valid}
+                                        touched={this.state.controls.email.touched} 
+                                        autoCapitalize='none' 
+                                        autoCorrect={false}
+                                        keyboardType='email-address' />
                                     <View style={
                                         this.state.viewMode === 'portrait' || 
                                         this.state.authMode === 'Sign In'
-                                            ? styles.portraitPasswordWrapper 
-                                            : [styles.landscapePasswordWrapper, {marginRight: 4}]}>
-                                        <DefaultInput 
-                                            placeholder='Password' 
-                                            style={styles.input} 
-                                            placeholderTextColor='rgba(255, 255, 255, 0.8)'
-                                            value={this.state.controls.password.value}
-                                            onChangeText={(val) => this.updateInputState('password', val)}
-                                            valid={this.state.controls.password.valid}
-                                            touched={this.state.controls.password.touched}
-                                            secureTextEntry />
+                                            ? styles.portraitPasswordContainer 
+                                            : styles.landscapePasswordContainer}>
+                                        <View style={
+                                            this.state.viewMode === 'portrait' || 
+                                            this.state.authMode === 'Sign In'
+                                                ? styles.portraitPasswordWrapper 
+                                                : [styles.landscapePasswordWrapper, {marginRight: 4}]}>
+                                            <DefaultInput 
+                                                placeholder='Password' 
+                                                style={styles.input} 
+                                                placeholderTextColor='rgba(255, 255, 255, 0.8)'
+                                                value={this.state.controls.password.value}
+                                                onChangeText={(val) => this.updateInputState('password', val)}
+                                                valid={this.state.controls.password.valid}
+                                                touched={this.state.controls.password.touched}
+                                                secureTextEntry />
+                                        </View>
+                                        {confirmPasswordControl}
                                     </View>
-                                    {confirmPasswordControl}
                                 </View>
                             </View>
-                        <BackgroundButton
-                            disabled={
-                                this.state.authMode === 'Sign Up' &&
-                                !this.state.controls.confirmPassword.valid || 
-                                !this.state.controls.password.valid || 
-                                !this.state.controls.email.valid
-                            }
-                            onPress={this.loginHandler} 
-                            color='#29aaf4'>
-                            {this.state.authMode === 'Sign In' ? 'Sign In' : 'Create Account'}
-                        </BackgroundButton>
-                        <BackgroundButton
-                            onPress={this.switchAuthModeHandler}
-                            color='#29aaf4'>
-                            {this.state.authMode === 'Sign In' ? 'Sign Up' : 'Switch to Sign In'}
-                        </BackgroundButton>
-                    </KeyboardAvoidingView>
-                </TouchableWithoutFeedback>
+                            <BackgroundButton
+                                disabled={
+                                    this.state.authMode === 'Sign Up' &&
+                                    !this.state.controls.confirmPassword.valid || 
+                                    !this.state.controls.password.valid || 
+                                    !this.state.controls.email.valid
+                                }
+                                onPress={this.loginHandler} 
+                                color='#29aaf4'>
+                                {this.state.authMode === 'Sign In' ? 'Sign In' : 'Create Account'}
+                            </BackgroundButton>
+                            <BackgroundButton
+                                onPress={this.switchAuthModeHandler}
+                                color='#29aaf4'>
+                                {this.state.authMode === 'Sign In' ? 'Sign Up' : 'Switch to Sign In'}
+                            </BackgroundButton>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </KeyboardAvoidingView>
             </ImageBackground>
         );
     }
@@ -214,6 +218,17 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    largeWrapper: {
+        height: '100%',
+        width: '100%', 
+        alignItems: 'center', 
+        justifyContent: 'center'
+    },
+    smallWrapper: {
+        width: '100%', 
+        alignItems: 'center', 
+        justifyContent: 'center'
     },
     backgroundImage: {
         width: '100%',
