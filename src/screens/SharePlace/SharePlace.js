@@ -81,15 +81,7 @@ class SharePlaceScreen extends Component {
         })
     }
 
-    placeAddedHandler = () => {
-        this.props.onAddPlace(
-            this.state.controls.placeName.value, 
-            this.state.controls.location.value,
-            this.state.controls.image.value
-        );
-    }
-
-    imagedPickedHandler = image => {
+    imagePickedHandler = image => {
         this.setState(prevState => {
             return {
                 controls: {
@@ -99,8 +91,16 @@ class SharePlaceScreen extends Component {
                         valid: true
                     }
                 }
-            }
-        })
+            };
+        });
+    }
+
+    placeAddedHandler = () => {
+        this.props.onAddPlace(
+            this.state.controls.placeName.value, 
+            this.state.controls.location.value,
+            this.state.controls.image.value
+        );
     }
 
     render () {
@@ -108,7 +108,7 @@ class SharePlaceScreen extends Component {
             <ScrollView>
                 <View style={styles.container}>
                     <PickImage
-                        onImagePicked={this.imagedPickedHandler} />
+                        onImagePicked={this.imagePickedHandler} />
                     <PickLocation 
                         onLocationPick={this.locationPickedHandler} />
                     <PlaceInput

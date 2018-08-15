@@ -23,5 +23,3 @@ ios
 .firebaserc
 firebase.json
 functions
-
-config.js
