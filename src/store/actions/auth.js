@@ -31,11 +31,19 @@ export const tryAuth = (authData, authMode) => {
     .then(res => res.json())
     .then(parsedRes => {
       dispatch(actions.uiStopLoading())
-      if (parsedRes.error) {
+      if (!parsedRes.idToken) {
         alert('Authentication Failed - Try Again')
       } else {
+        dispatch(authSetToken(parsedRes.idToken))
         startMainTabs();
       }
     });
+  }
+}
+
+export const authSetToken = token => {
+  return {
+    type: actionTypes.AUTH_SET_TOKEN,
+    token: token
   }
 }
