@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import { uiStartLoading, uiStopLoading } from './ui';
+import * as actions from './index';
 
 const config = require('../../config')
 const key = config.API_KEY
@@ -7,17 +7,23 @@ const storeImageKey = config.STORE_IMAGE_KEY
 
 export const addPlace = (placeName, location, image) => {
     return dispatch => {
-        dispatch(uiStartLoading());
-        fetch(`${storeImageKey}`, {
-            method: 'POST',
-            body: JSON.stringify({
-                image: image.base64
+        dispatch(actions.uiStartLoading());
+        dispatch(actions.authGetToken())
+        .catch(() => {
+            alert('No Valid Token Found')
+        })
+        .then(token => {
+            return fetch(`${storeImageKey}`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    image: image.base64
+                })
             })
         })
         .catch(err => {
             console.log(err);
             alert('Error: Something went wrong')
-            dispatch(uiStopLoading());
+            dispatch(actions.uiStopLoading());
         })
         .then(res => res.json())
         .then(parsedRes => {
@@ -34,19 +40,25 @@ export const addPlace = (placeName, location, image) => {
         .then(res => res.json())
         .then(parsedRes => {
             console.log(parsedRes);
-            dispatch(uiStopLoading());
+            dispatch(actions.uiStopLoading());
         })
         .catch(err => {
             console.log(err);
             alert('Error: Something went wrong')
-            dispatch(uiStopLoading());
+            dispatch(actions.uiStopLoading());
         });
     };
 };
 
 export const getPlaces = () => {
     return dispatch => {
-        fetch('https://social-places-1534271849784.firebaseio.com/places/.json')
+        dispatch(actions.authGetToken())
+        .then(token => {
+            return fetch('https://social-places-1534271849784.firebaseio.com/places.json?auth=' + token)
+        })
+        .catch(() => {
+            alert('No Valid Token Found')
+        })
         .then(res => (res.json()))
         .then(parsedRes => {
             const places = [];
@@ -77,9 +89,20 @@ export const setPlaces = places => {
 
 export const deletePlace = (key) => {
     return dispatch => {
-        dispatch(removePlace(key))
-        fetch('https://social-places-1534271849784.firebaseio.com/places/' + key + '.json', {
-            method: "DELETE",
+        dispatch(actions.authGetToken())
+        .catch(() => {
+            alert('No Valid Token Found')
+        })
+        .then(token => {
+            dispatch(removePlace(key))
+            return fetch(
+                'https://social-places-1534271849784.firebaseio.com/places/' + 
+                key + 
+                '.json?auth=' + 
+                token, {
+                    method: "DELETE",
+                }
+            )
         })
         .then(res => res.json())
         .then(parsedRes => {
