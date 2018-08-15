@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   placeImage: {
     width: '100%',
-    height: '100%'
+    height: '100%',
   },
   placeName: {
     fontWeight: 'bold',
@@ -117,7 +117,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   subContainer: {
-    flex: 1
+    flex: 1,
+    margin: 1
   }
 });
 
