@@ -12,6 +12,7 @@ export const addPlace = (placeName, location, image) => {
         })
         .catch(err => {
             console.log(err);
+            alert('Error: Something went wrong')
             dispatch(uiStopLoading());
         })
         .then(res => res.json())
@@ -28,6 +29,7 @@ export const addPlace = (placeName, location, image) => {
         })
         .catch(err => {
             console.log(err);
+            alert('Error: Something went wrong')
             dispatch(uiStopLoading());
         })
         .then(res => res.json())
@@ -40,12 +42,12 @@ export const addPlace = (placeName, location, image) => {
 
 export const getPlaces = () => {
     return dispatch => {
-        fetch('https://social-places-1534271849784.firebaseio.com/places.json')
+        fetch('https://social-places-1534271849784.firebaseio.com/places/.json')
         .catch(err => {
             alert('Error: Something went wrong');
             console.log(err)
         })
-        .then(res => res.json())
+        .then(res => console.log(res.json()))
         .then(parsedRes => {
             const places = [];
             for (let key in parsedRes) {
@@ -70,8 +72,25 @@ export const setPlaces = places => {
 }
 
 export const deletePlace = (key) => {
-    return {
-        type: actionTypes.DELETE_PLACE,
-        placeKey: key
+    return dispatch => {
+        dispatch(removePlace(key))
+        fetch('https://social-places-1534271849784.firebaseio.com/places/' + key + '.json', {
+            method: "DELETE",
+        })
+        .catch(err => {
+            alert('Error: Something went wrong');
+            console.log(err)
+        })
+        .then(res => res.json())
+        .then(parsedRes => {
+            console.log('Deleted')
+        })
     };
 };
+
+export const removePlace = key => {
+    return {
+        type: actionTypes.REMOVE_PLACE,
+        key: key
+    }
+}

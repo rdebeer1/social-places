@@ -11,10 +11,10 @@ const setPlaces = (state, action) => {
   })
 }
 
-const deletePlace = (state, action) => {
+const removePlace = (state, action) => {
   return updateObject(state, {
     places: state.places.filter(place => {
-        return place.key !== action.placeKey;
+        return place.key !== action.key;
     }),
   });
 };
@@ -22,7 +22,7 @@ const deletePlace = (state, action) => {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_PLACES: return setPlaces(state, action);
-    case actionTypes.DELETE_PLACE: return deletePlace(state, action);
+    case actionTypes.REMOVE_PLACE: return removePlace(state, action);
     default: return state;
   }
 };

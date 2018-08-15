@@ -24,7 +24,7 @@ class FindPlaceScreen extends Component {
     }
 
     componentDidMount() {
-        this.props.onGetPlaces()
+        this.props.onLoadPlaces();
     }
 
     onNavigatorEvent = event => {
@@ -36,20 +36,7 @@ class FindPlaceScreen extends Component {
             }
         }
     }
-
-    itemSelectedHandler = key => {
-        const selPlace = this.props.places.find(place => {
-            return place.key === key;
-        });
-        this.props.navigator.push({
-            screen: 'social-places.PlaceDetailScreen',
-            title: selPlace.name,
-            passProps: {
-                selectedPlace: selPlace
-            }
-        });
-    }
-
+    
     placesLoadedHandler = () => {
         Animated.timing(this.state.placesAnim, {
             toValue: 1,
@@ -70,6 +57,20 @@ class FindPlaceScreen extends Component {
             this.placesLoadedHandler();
         });
     }
+    
+    itemSelectedHandler = key => {
+        const selPlace = this.props.places.find(place => {
+            return place.key === key;
+        });
+        this.props.navigator.push({
+            screen: 'social-places.PlaceDetailScreen',
+            title: selPlace.name,
+            passProps: {
+                selectedPlace: selPlace
+            }
+        });
+    }
+
 
     render () {
         let content = (
@@ -144,14 +145,15 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => {
-    return {
-        places: state.places.places
-    }
-}
+  return {
+    places: state.places.places
+  };
+};
+
 const mapDispatchToProps = dispatch => {
-    return {
-        onGetPlaces: () => dispatch(actions.getPlaces())
-    }
-}
+  return {
+    onLoadPlaces: () => dispatch(actions.getPlaces())
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(FindPlaceScreen);
