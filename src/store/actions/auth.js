@@ -1,17 +1,18 @@
 import * as actionTypes from './actionTypes'
+import * as actions from './index';
+import startMainTabs from '../../screens/MainTabs/startMainTabs'
 
 const config = require('../../config')
 const authKey = config.AUTH_API_KEY
 
-export const tryAuth = (authData) => {
+export const tryAuth = (authData, authMode) => {
   return dispatch => {
-    dispatch(authSignup(authData));
-  }
-}
-
-export const authSignup = (authData) => {
-  return dispatch => {
-    fetch(`https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${authKey}`, {
+    let url = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${authKey}`
+    dispatch(actions.uiStartLoading())
+    if (authMode === 'Sign Up') {
+      url = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${authKey}`
+    }
+    fetch(url, {
       method: 'POST',
       body: JSON.stringify({
         email: authData.email,
@@ -25,10 +26,16 @@ export const authSignup = (authData) => {
     .catch(err => {
       console.log(err);
       alert('Authentication Failed - Try Again');
+      dispatch(actions.uiStopLoading())
     })
     .then(res => res.json())
     .then(parsedRes => {
-      console.log(parsedRes)
+      dispatch(actions.uiStopLoading())
+      if (parsedRes.error) {
+        alert('Authentication Failed - Try Again')
+      } else {
+        startMainTabs();
+      }
     });
   }
 }
