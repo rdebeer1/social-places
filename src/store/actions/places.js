@@ -1,10 +1,14 @@
 import * as actionTypes from './actionTypes';
 import { uiStartLoading, uiStopLoading } from './ui';
 
+const config = require('../../config')
+const key = config.API_KEY
+const storeImageKey = config.STORE_IMAGE_KEY
+
 export const addPlace = (placeName, location, image) => {
     return dispatch => {
         dispatch(uiStartLoading());
-        fetch('https://us-central1-social-places-1534271849784.cloudfunctions.net/storeImage', {
+        fetch(`${storeImageKey}`, {
             method: 'POST',
             body: JSON.stringify({
                 image: image.base64
@@ -22,7 +26,7 @@ export const addPlace = (placeName, location, image) => {
                 location: location,
                 image: parsedRes.imageUrl
             };
-            return fetch('https://social-places-1534271849784.firebaseio.com/places.json', {
+            return fetch(`${key}places.json`, {
                 method: "POST",
                 body: JSON.stringify(placeData)
             })
