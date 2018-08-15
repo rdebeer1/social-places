@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 // components
 import PlaceList from '../../components/PlaceList/PlaceList';
+//actions
+import * as actions from '../../store/actions/index';
 
 class FindPlaceScreen extends Component {
     static navigatorStyle = {
@@ -16,10 +18,14 @@ class FindPlaceScreen extends Component {
         placesAnim: new Animated.Value(0)
     }
 
-     constructor(props) {
-         super(props);
-         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
-     }
+    constructor(props) {
+        super(props);
+        this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent)
+    }
+
+    componentDidMount() {
+        this.props.onGetPlaces()
+    }
 
     onNavigatorEvent = event => {
         if (event.type === 'NavBarButtonPress') {
@@ -137,10 +143,15 @@ const styles = StyleSheet.create({
     
 });
 
-mapStateToProps = state => {
+const mapStateToProps = state => {
     return {
         places: state.places.places
     }
 }
+const mapDispatchToProps = dispatch => {
+    return {
+        onGetPlaces: () => dispatch(actions.getPlaces())
+    }
+}
 
-export default connect(mapStateToProps)(FindPlaceScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(FindPlaceScreen);

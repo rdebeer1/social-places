@@ -38,6 +38,37 @@ export const addPlace = (placeName, location, image) => {
     };
 };
 
+export const getPlaces = () => {
+    return dispatch => {
+        fetch('https://social-places-1534271849784.firebaseio.com/places.json')
+        .catch(err => {
+            alert('Error: Something went wrong');
+            console.log(err)
+        })
+        .then(res => res.json())
+        .then(parsedRes => {
+            const places = [];
+            for (let key in parsedRes) {
+                places.push({
+                    ...parsedRes[key],
+                    image: {
+                        uri: parsedRes[key].image
+                    },
+                    key: key
+                })
+            }
+            dispatch(setPlaces(places))
+        })
+    }
+}
+
+export const setPlaces = places => {
+    return {
+        type: actionTypes.SET_PLACES,
+        places: places
+    }
+}
+
 export const deletePlace = (key) => {
     return {
         type: actionTypes.DELETE_PLACE,

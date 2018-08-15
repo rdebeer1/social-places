@@ -5,18 +5,11 @@ const initialState = {
   places: []
 };
 
-const addPlace = (state, action) => {
+const setPlaces = (state, action) => {
   return updateObject(state, {
-    places: state.places.concat({
-      key: Math.random(),
-      name: action.placeName,
-      image: {
-        uri: action.image.uri
-      },
-      location: action.location
-    })
-  });
-};
+    places: action.places
+  })
+}
 
 const deletePlace = (state, action) => {
   return updateObject(state, {
@@ -26,11 +19,9 @@ const deletePlace = (state, action) => {
   });
 };
 
-
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.ADD_PLACE: return addPlace(state, action);
+    case actionTypes.SET_PLACES: return setPlaces(state, action);
     case actionTypes.DELETE_PLACE: return deletePlace(state, action);
     default: return state;
   }
