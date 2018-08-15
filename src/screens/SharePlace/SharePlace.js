@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet, ScrollView } from 'react-native';
+import { View, Button, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 
 //actions
@@ -104,6 +104,23 @@ class SharePlaceScreen extends Component {
     }
 
     render () {
+        let submitButton = (
+            <Button 
+                title='Share'
+                onPress={this.placeAddedHandler}
+                disabled={
+                    !this.state.controls.placeName.valid ||
+                    !this.state.controls.location.valid ||
+                    !this.state.controls.image.valid
+                } />
+        );
+
+        if (this.props.isLoading) {
+            submitButton = (
+                <ActivityIndicator />
+            )
+        }
+
         return (
             <ScrollView>
                 <View style={styles.container}>
@@ -115,14 +132,7 @@ class SharePlaceScreen extends Component {
                         placeData={this.state.controls.placeName} 
                         onChangeText={this.placeNameChangedHandler} />
                     <View style={styles.button}>
-                        <Button 
-                            title='Share'
-                            onPress={this.placeAddedHandler}
-                            disabled={
-                                !this.state.controls.placeName.valid ||
-                                !this.state.controls.location.valid ||
-                                !this.state.controls.image.valid
-                            } />
+                        {submitButton}
                     </View>
                 </View>
             </ScrollView>
@@ -141,10 +151,17 @@ const styles = StyleSheet.create({
     }
 });
 
-mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
     return {
-        onAddPlace: (placeName, location, image) => dispatch(actions.addPlace(placeName, location, image)),
+        isLoading: state.ui.isLoading
     }
 }
 
-export default connect(null, mapDispatchToProps)(SharePlaceScreen);
+const mapDispatchToProps = dispatch => {
+    return {
+        onAddPlace: (placeName, location, image) => dispatch(actions.addPlace(placeName, location, image)),
+        
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SharePlaceScreen);
