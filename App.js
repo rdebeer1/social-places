@@ -45,7 +45,7 @@ Navigation.registerComponent(
 );
 
 // Start a App
-Navigation.startSingleScreenApp({
+export default () => Navigation.startSingleScreenApp({
   screen: {
     screen: 'social-places.AuthScreen',
     title: 'Login'

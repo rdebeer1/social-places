@@ -1,4 +1,6 @@
 import { AsyncStorage } from 'react-native';
+//app
+import App from '../../../App';
 //screens
 import startMainTabs from '../../screens/MainTabs/startMainTabs'
 //actions
@@ -149,5 +151,22 @@ export const authClearStorage = () => {
   return dispatch => {
     AsyncStorage.removeItem('ap:auth:token');
     AsyncStorage.removeItem('ap:auth:expiresInDate');
+    return AsyncStorage.removeItem('ap:auth:refreshToken');
+  }
+}
+
+export const authLogout = () => {
+  return dispatch => {
+    dispatch(authClearStorage())
+    .then(() => {
+      App();
+    });
+    dispatch(authRemoveToken());
+  }
+}
+
+export const authRemoveToken = () => {
+  return {
+    type: actionTypes.AUTH_REMOVE_TOKEN
   }
 }
