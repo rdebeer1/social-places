@@ -2,18 +2,21 @@ import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../hoc/updateObject';
 
 const initialState = {
-  token: null
+  token: null,
+  expiresInDate: null
 }
 
 const authSetToken = (state, action) => {
     return updateObject(state, { 
-      token: action.token 
+      token: action.token,
+      expiresInDate: action.expiresInDate 
     })
 }
 
 const authRemoveToken  = (state, action) => {
   return updateObject(state, {
-    token: null
+    token: null,
+    expiresInDate: null
   })
 }
 
