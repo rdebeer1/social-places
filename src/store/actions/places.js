@@ -5,6 +5,12 @@ const config = require('../../config')
 const apiKey = config.API_KEY
 const storeImageKey = config.STORE_IMAGE_KEY
 
+export const startAddPlace = () => {
+    return {
+        type: actionTypes.START_ADD_PLACE
+    }
+}
+
 export const addPlace = (placeName, location, image) => {
     return dispatch => {
         let authToken;
@@ -46,6 +52,7 @@ export const addPlace = (placeName, location, image) => {
         .then(parsedRes => {
             console.log(parsedRes);
             dispatch(actions.uiStopLoading());
+            dispatch(placeAdded())
         })
         .catch(err => {
             console.log(err);
@@ -54,6 +61,12 @@ export const addPlace = (placeName, location, image) => {
         });
     };
 };
+
+export const placeAdded = () => {
+    return {
+        type: actionTypes.PLACE_ADDED,
+    }
+}
 
 export const getPlaces = () => {
     return dispatch => {
