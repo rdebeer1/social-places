@@ -11,8 +11,11 @@ const mainText = props => (
 
 const styles = StyleSheet.create({
   mainText: {
-    color: 'black',
-    backgroundColor: 'transparent'
+    color: '#247BA0',
+    backgroundColor: 'transparent',
+    marginBottom: 100,
+    fontFamily: 'OperatorMonoSSm-MediumItalic',
+    letterSpacing: -3,
   }
 });
 

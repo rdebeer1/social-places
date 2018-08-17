@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Button, Image, StyleSheet } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import BackgroundButton from '../UI/BackgroundButton/BackgroundButton';
 class PickImage extends Component {
   state = {
     pickedImage: null
@@ -44,11 +45,12 @@ class PickImage extends Component {
             style={styles.previewImage}
             source={this.state.pickedImage} />
         </View>
-        <View style={styles.button}>
-            <Button
-              color='#70C1B3'
-              title='Pick a Photo'
-              onPress={this.pickImageHandler} />
+        <View style={styles.buttonContainer}>
+            <BackgroundButton
+            style={styles.button}
+              onPress={this.pickImageHandler}>
+              Upload A Photo
+              </BackgroundButton>
         </View>
       </View>
     )
@@ -74,7 +76,6 @@ const styles = StyleSheet.create({
   },
   button: {
       margin: 8,
-      width: '60%',
       borderColor: '#70C1B3',
       borderWidth: 2,
       borderRadius: 50,
@@ -82,6 +83,10 @@ const styles = StyleSheet.create({
   previewImage: {
       width: '100%',
       height: '100%'
+  },
+  buttonContainer: {
+    width: '100%',
+    alignItems: 'center',
   }
 });
 

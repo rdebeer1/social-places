@@ -8,6 +8,7 @@ import * as actions from '../../store/actions/index';
 import PlaceInput from '../../components/PlaceInput/PlaceInput';
 import PickImage from '../../components/PickImage/PickImage';
 import PickLocation from '../../components/PickLocation/PickLocation';
+import BackgroundButton from '../../components/UI/BackgroundButton/BackgroundButton';
 //utility
 import validate from '../../utility/validation';
 
@@ -129,15 +130,17 @@ class SharePlaceScreen extends Component {
 
     render () {
         let submitButton = (
-            <Button
-                color = '#70C1B3'
-                title='Share'
+            <BackgroundButton
+                style={styles.button}
+                color='white'
                 onPress={this.placeAddedHandler}
                 disabled={
                     !this.state.controls.placeName.valid ||
                     !this.state.controls.location.valid ||
                     !this.state.controls.image.valid
-                } />
+                }>
+                    Share
+                </BackgroundButton>
         );
 
         if (this.props.isLoading) {
@@ -158,7 +161,7 @@ class SharePlaceScreen extends Component {
                     <PlaceInput
                         placeData={this.state.controls.placeName} 
                         onChangeText={this.placeNameChangedHandler} />
-                    <View style={this.props.isLoading ? styles.loadingButton : styles.button}>
+                    <View style={this.props.isLoading ? styles.loadingButton : styles.buttonContainer}>
                         {submitButton}
                     </View>
                 </View>
@@ -174,14 +177,17 @@ const styles = StyleSheet.create({
     },
     button: {
         margin: 8,
-        width: '60%',
         borderColor: '#70C1B3',
         borderWidth: 2,
-        borderRadius: 50
+        borderRadius: 50,
     },
     loadingButton: {
         borderWidth: 0,
-        margin: 10
+        margin: 10,
+    },
+    buttonContainer: {
+        width: '100%',
+        alignItems: 'center'
     }
 });
 

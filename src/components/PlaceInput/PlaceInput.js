@@ -18,7 +18,7 @@ const placeInput = props => (
 
 const styles = StyleSheet.create({
   placeView: {
-      width: '80%',
+      width: '50%',
       borderWidth: 2,
       borderTopWidth: 0,
       borderLeftWidth: 0,
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     color: '#247BA0',
+    fontFamily: 'OperatorMonoSSm-MediumItalic'
   }
 })
 

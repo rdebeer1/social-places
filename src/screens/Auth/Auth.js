@@ -7,6 +7,8 @@ import * as actions from '../../store/actions/index';
 //components
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput';
 import BackgroundButton from '../../components/UI/BackgroundButton/BackgroundButton';
+import HeadingText from '../../components/UI/HeadingText/HeadingText';
+import MainText from "../../components/UI/MainText/MainText";
 //utility
 import validate from '../../utility/validation';
 //source
@@ -123,6 +125,7 @@ class AuthScreen extends Component {
     }
 
     render () {
+        let headingText = null;
         let confirmPasswordControl = null;
         let signInButton = (
             <BackgroundButton
@@ -133,10 +136,18 @@ class AuthScreen extends Component {
                     !this.state.controls.email.valid
                 }
                 onPress={this.authHandler}
-                color='#70C1B3'>
+                style={styles.button}>
                 {this.state.authMode === 'Sign In' ? 'Sign In' : 'Create Account'}
             </BackgroundButton>
         )
+
+        if (this.state.viewMode === "portrait") {
+            headingText = (
+                <MainText>
+                    <HeadingText>Social Places</HeadingText>
+                </MainText>
+            );
+        }
 
         if (this.state.authMode === 'Sign Up') {
             confirmPasswordControl = (
@@ -174,6 +185,7 @@ class AuthScreen extends Component {
                         onPress={Keyboard.dismiss}>
                         <View style={styles.largeWrapper}>
                             <View style={styles.smallWrapper}>
+                            {headingText}
                                 <View 
                                     style={styles.inputContainer}>
                                     <DefaultInput 
@@ -214,7 +226,8 @@ class AuthScreen extends Component {
                             {signInButton}
                             <BackgroundButton
                                 onPress={this.switchAuthModeHandler}
-                                color = '#70C1B3' >
+                                style={styles.button}
+                            >
                                 {this.state.authMode === 'Sign In' ? 'Sign Up' : 'Switch to Sign In'}
                             </BackgroundButton>
                         </View>
@@ -267,6 +280,9 @@ const styles = StyleSheet.create({
     },
     landscapePasswordWrapper: {
         flex: 1,
+    },
+    button: {
+        backgroundColor: 'white',
     }
 });
 

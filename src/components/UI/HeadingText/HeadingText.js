@@ -11,7 +11,7 @@ const headingText = props => (
 
 const styles = StyleSheet.create({
   headingText: {
-    fontSize: 28,
+    fontSize: 36,
     fontWeight: 'bold'
   }
 });
