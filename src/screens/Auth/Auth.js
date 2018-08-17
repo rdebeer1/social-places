@@ -132,8 +132,8 @@ class AuthScreen extends Component {
                     !this.state.controls.password.valid || 
                     !this.state.controls.email.valid
                 }
-                onPress={this.authHandler} 
-                color='#29aaf4'>
+                onPress={this.authHandler}
+                color='#70C1B3'>
                 {this.state.authMode === 'Sign In' ? 'Sign In' : 'Create Account'}
             </BackgroundButton>
         )
@@ -214,7 +214,7 @@ class AuthScreen extends Component {
                             {signInButton}
                             <BackgroundButton
                                 onPress={this.switchAuthModeHandler}
-                                color='#29aaf4'>
+                                color = '#70C1B3' >
                                 {this.state.authMode === 'Sign In' ? 'Sign Up' : 'Switch to Sign In'}
                             </BackgroundButton>
                         </View>

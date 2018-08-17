@@ -8,7 +8,8 @@ const placeInput = props => (
   <DefaultInput
     viewStyle={styles.placeView}
     style={styles.placeInput}
-    placeholder='Place Name' 
+    placeholder='Place Name'
+    placeholderTextColor='#50514F'
     value={props.placeData.value}
     valid={props.placeData.valid}
     touched={props.placeData.touched}
@@ -18,11 +19,11 @@ const placeInput = props => (
 const styles = StyleSheet.create({
   placeView: {
       width: '80%',
-      borderWidth: 1,
+      borderWidth: 2,
       borderTopWidth: 0,
       borderLeftWidth: 0,
       borderRightWidth: 0,
-      borderColor: '#eee',
+      borderColor: '#50514F',
       padding: 10,
       backgroundColor: 'white'
   },
@@ -31,7 +32,8 @@ const styles = StyleSheet.create({
     padding: 0,
     borderWidth: 0,
     textAlign: 'center',
-    fontWeight: 'bold'
+    fontSize: 18,
+    color: '#247BA0',
   }
 })
 

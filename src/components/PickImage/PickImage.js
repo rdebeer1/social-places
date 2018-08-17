@@ -45,7 +45,8 @@ class PickImage extends Component {
             source={this.state.pickedImage} />
         </View>
         <View style={styles.button}>
-            <Button 
+            <Button
+              color='#70C1B3'
               title='Pick a Photo'
               onPress={this.pickImageHandler} />
         </View>
@@ -73,7 +74,10 @@ const styles = StyleSheet.create({
   },
   button: {
       margin: 8,
-      width: '60%'
+      width: '60%',
+      borderColor: '#70C1B3',
+      borderWidth: 2,
+      borderRadius: 50,
   },
   previewImage: {
       width: '100%',

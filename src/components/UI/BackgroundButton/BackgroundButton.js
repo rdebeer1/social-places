@@ -42,11 +42,11 @@ const styles = StyleSheet.create({
   }, 
   disabled: {
     backgroundColor: '#eee',
-    borderColor: '#aaa',
+    borderColor: '#50514F',
     width: '50%'
   },
   disabledText: {
-    color: '#aaa',
+    color: '#50514F',
     fontWeight: 'bold',
     textAlign: 'center',
   }

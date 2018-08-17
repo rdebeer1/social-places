@@ -22,8 +22,8 @@ class SideDrawer extends Component {
               size={30}
               color='#bbb'
               style={styles.drawerItemIcon} />
-            <Text>
-              Sign Out
+            <Text style={styles.signOutText}>
+              sign out
             </Text>
           </View>
         </TouchableOpacity>
@@ -46,6 +46,11 @@ const styles = StyleSheet.create({
   },
   drawerItemIcon: {
     marginRight: 10
+  },
+  signOutText: {
+    fontFamily: 'OperatorMonoSSm-MediumItalic',
+    letterSpacing: -1,
+    color: '#247BA0'
   }
 })
 

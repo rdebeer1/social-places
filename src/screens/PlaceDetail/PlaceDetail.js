@@ -42,6 +42,38 @@ class PlaceDetail extends Component {
             ? styles.portraitContainer 
             : styles.landscapeContainer
         ]}>
+        <View style={styles.headerContainer}>
+          <View style={styles.rowContainer}>
+            <View style={styles.textIconAlign}>
+              <View style={styles.deleteButton}>
+                <Icon
+                  size={20} 
+                  name = {
+                    Platform.OS === 'android' ? 'md-pin' : 'ios-pin'
+                  }
+                  color='#70C1B3' />
+                </View>
+              <Text 
+                style={styles.placeName}>
+                {this.props.selectedPlace.name}
+              </Text>
+            </View>
+            <View style={styles.textIconAlign}>
+              <TouchableOpacity onPress={this.placeDeleteHandler}>
+                <View style={styles.deleteButton}>
+                  <Icon
+                    size={20} 
+                    name={Platform.OS === 'android' ? 'md-close-circle-outline' : 'ios-close-circle-outline'} 
+                    color='#F25F5C' />
+                </View>
+              </TouchableOpacity>
+              <Text 
+                style={styles.placeName}>
+                Delete
+              </Text>
+            </View>
+          </View>
+        </View>
         <View style={styles.placeDetailContainer}>
           <View style={styles.subContainer}>
               <Image 
@@ -64,24 +96,6 @@ class PlaceDetail extends Component {
             </MapView>
           </View>
         </View>
-        <View style={styles.subContainer}>
-          <View>
-            <Text 
-              style={styles.placeName}>
-              {this.props.selectedPlace.name}
-            </Text>
-          </View>
-          <View>
-            <TouchableOpacity onPress={this.placeDeleteHandler}>
-              <View style={styles.deleteButton}>
-                <Icon 
-                  size={30} 
-                  name={Platform.OS === 'android' ? 'md-trash' : 'ios-trash'} 
-                  color='red' />
-              </View>
-            </TouchableOpacity>
-          </View>
-        </View>
       </View>
     )
   }
@@ -89,17 +103,24 @@ class PlaceDetail extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 40,
     flex: 1
   },
   portraitContainer: {
     flexDirection: 'column'
   },
   landscapeContainer: {
-    flexDirection: 'row'
+    flexDirection: 'column',
   },
   placeDetailContainer: {
-    flex: 2,
+    flex: 1,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: '#efefef',
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   placeImage: {
     width: '100%',
@@ -107,18 +128,33 @@ const styles = StyleSheet.create({
   },
   placeName: {
     fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 28
-  }, 
+    fontSize: 12,
+    color: '#50514F'
+  },
+  delete: {
+    fontWeight: 'bold',
+    fontSize: 12,
+    color: '#F25F5C'
+  },
   map: {
     ...StyleSheet.absoluteFillObject
   },
   deleteButton: {
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingRight: 5
   },
   subContainer: {
     flex: 1,
-    margin: 1
+  },
+  textIconAlign: {
+    flex: 1,
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    justifyContent: 'center'
+  },
+  rowContainer: {
+    flex: 1,
+    flexDirection: 'row'
   }
 });
 

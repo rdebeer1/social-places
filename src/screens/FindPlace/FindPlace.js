@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Animated} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Animated, ImageBackground} from 'react-native';
 import { connect } from 'react-redux';
 
 // components
 import PlaceList from '../../components/PlaceList/PlaceList';
 //actions
 import * as actions from '../../store/actions/index';
-
+//assets
+import backgroundImage from '../../assets/find-place.jpg'
 class FindPlaceScreen extends Component {
     static navigatorStyle = {
-        navBarButtonColor: 'orange'
+        navBarButtonColor: '#F25F5C',
+        navBarTextFontFamily: 'OperatorMonoSSm-Medium'
     }
 
     state = {
@@ -41,7 +43,7 @@ class FindPlaceScreen extends Component {
     placesLoadedHandler = () => {
         Animated.timing(this.state.placesAnim, {
             toValue: 1,
-            duration: 500,
+            duration: 1000,
             useNativeDriver: true
         }).start();
     }
@@ -49,7 +51,7 @@ class FindPlaceScreen extends Component {
     placesSearchHandler = () => {
         Animated.timing(this.state.removeAnim, {
             toValue: 0,
-            duration: 500,
+            duration: 1000,
             useNativeDriver: true
         }).start(() => {
             this.setState({
@@ -82,7 +84,7 @@ class FindPlaceScreen extends Component {
                         {
                             scale: this.state.removeAnim.interpolate({
                                 inputRange: [0, 1],
-                                outputRange: [12, 1]
+                                outputRange: [2, 1]
                             })
                         }
                     ]
@@ -114,13 +116,15 @@ class FindPlaceScreen extends Component {
         }
 
         return (
-            <View 
-                style={
-                    this.state.placesLoaded 
-                        ? null 
-                        : styles.buttonContainer}>
+            this.state.placesLoaded ?
+            <View>
                 {content}
-            </View>
+            </View> :
+            <ImageBackground 
+            source={backgroundImage}
+                style={ styles.buttonContainer}>
+                {content}
+            </ImageBackground >
         );
     }
 }
@@ -129,18 +133,21 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     searchButton: {
-        borderColor: 'orange',
+        backgroundColor: 'rgba(0,0,0, 0.2)',
+        borderColor: '#FFE066',
         borderWidth: 3,
         borderRadius: 50,
         padding: 20
     },
     searchButtonText: {
-        color: 'orange',
+        color: '#FFE066',
         fontWeight: 'bold',
-        fontSize: 26
+        fontSize: 26,
+        fontFamily: 'OperatorMonoSSm-BookItalic',
+        letterSpacing: -3
     },
     
 });

@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     borderColor: 'red'
   },
   valid: {
-    borderColor: 'green'
+    borderColor: '#247BA0'
   }
 });
 

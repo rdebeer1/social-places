@@ -13,7 +13,8 @@ import validate from '../../utility/validation';
 
 class SharePlaceScreen extends Component {
     static navigatorStyle = {
-        navBarButtonColor: 'orange'
+        navBarButtonColor: '#F25F5C',
+        navBarTextFontFamily: 'OperatorMonoSSm-Medium'
     }
 
     constructor(props) {
@@ -128,7 +129,8 @@ class SharePlaceScreen extends Component {
 
     render () {
         let submitButton = (
-            <Button 
+            <Button
+                color = '#70C1B3'
                 title='Share'
                 onPress={this.placeAddedHandler}
                 disabled={
@@ -156,7 +158,7 @@ class SharePlaceScreen extends Component {
                     <PlaceInput
                         placeData={this.state.controls.placeName} 
                         onChangeText={this.placeNameChangedHandler} />
-                    <View style={styles.button}>
+                    <View style={this.props.isLoading ? styles.loadingButton : styles.button}>
                         {submitButton}
                     </View>
                 </View>
@@ -172,7 +174,14 @@ const styles = StyleSheet.create({
     },
     button: {
         margin: 8,
-        width: '60%'
+        width: '60%',
+        borderColor: '#70C1B3',
+        borderWidth: 2,
+        borderRadius: 50
+    },
+    loadingButton: {
+        borderWidth: 0,
+        margin: 10
     }
 });
 
